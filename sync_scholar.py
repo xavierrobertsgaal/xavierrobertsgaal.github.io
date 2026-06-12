@@ -72,7 +72,7 @@ def main() -> None:
         # New Scholar items are almost always preprints: file them under
         # working papers; move and tag them by hand afterwards.
         text = PUBS_MD.read_text()
-        heading = "## working papers"
+        heading = "## Working papers"
         idx = text.index(heading) + len(heading)
         text = text[:idx] + "\n\n" + "\n".join(entries) + text[idx:]
         PUBS_MD.write_text(text)

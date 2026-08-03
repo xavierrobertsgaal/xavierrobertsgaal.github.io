@@ -83,7 +83,7 @@ body {
 .layout {
   display: grid;
   grid-template-columns: 8rem minmax(0, 42rem);
-  gap: 4rem;
+  column-gap: 4rem;
   align-items: start;
 }
 
@@ -231,6 +231,48 @@ li {
   font-size: 1.0625rem;
 }
 
+/* Reading list */
+
+.page-reading main ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.page-reading main li {
+  margin-bottom: 2rem;
+}
+
+.page-reading main li > p {
+  margin: 0;
+}
+
+.takeaways,
+.thoughts {
+  margin: 0.5rem 0 0;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--lavender);
+  font-size: 0.9375rem;
+}
+
+.takeaways strong,
+.thoughts strong {
+  margin-right: 0.25rem;
+  font-family: var(--sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.takeaways strong {
+  color: var(--purple);
+}
+
+.thoughts strong {
+  color: var(--indigo);
+}
+
 .tag {
   display: inline-block;
   margin-right: 0.3rem;
@@ -243,6 +285,45 @@ li {
   font-weight: 500;
   line-height: 1.4;
   vertical-align: 0.15em;
+}
+
+/* Webring — left link, centered label, right link, spread across the column */
+
+.webring {
+  grid-column: 2;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--lavender);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.webring p {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+}
+
+.webring p > a:first-child {
+  justify-self: start;
+}
+
+.webring p > a:last-child {
+  justify-self: end;
+}
+
+.webring a {
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.webring a:hover {
+  color: var(--purple);
 }
 
 @media (max-width: 950px) {
@@ -282,5 +363,19 @@ li {
     padding: 0 0 0 1.1rem;
     border-top: none;
     border-left: 1px solid var(--lavender);
+  }
+}
+
+/* Narrow screens: stack the webring's three items, centered */
+@media (max-width: 480px) {
+  .webring p {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.5rem;
+  }
+
+  .webring p > a:first-child,
+  .webring p > a:last-child {
+    justify-self: center;
   }
 }

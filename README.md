@@ -6,14 +6,16 @@ Markdown-first personal site for [Xavier Roberts-Gaal](https://xrg.scholars.harv
 
 - Pages live in `content/*.md` (frontmatter: just a `title`).
 - `uv run build.py` renders them to plain HTML in `dist/` — the template is a string inside `build.py`, styling is `style.css`. No framework.
+- Work-in-progress pages go in `content/drafts/` — the build skips anything nested there and drops its nav link, so drafts never publish. Move a file up into `content/` to go live.
 - Pushing to `main` auto-builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`.
 
 ## Local preview
 
 ```sh
-uv run build.py
-python3 -m http.server -d dist
+uv run serve.py
 ```
+
+Builds the site, serves it at <http://localhost:5500>, and live-reloads the browser whenever you edit content, styling, or the template. For a one-off build without the server, `uv run build.py` writes straight to `dist/`.
 
 ## Keeping publications in sync
 

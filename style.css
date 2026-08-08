@@ -379,3 +379,402 @@ li {
     justify-self: center;
   }
 }
+
+/* Fishbowl — pass-the-phone party game (content/fishbowl.md + fishbowl.js).
+   Editorial parlor-game: serif clue slips, hairline rules, small-caps labels. */
+
+#fishbowl {
+  max-width: 26rem;
+  font-family: var(--sans);
+}
+
+#fishbowl h1 {
+  margin-bottom: 0.5rem;
+  font-family: var(--serif);
+}
+
+.fb-label {
+  margin: 1.75rem 0 0.3rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.fb-screen > .fb-label:first-child {
+  margin-top: 0;
+}
+
+.fb-sub,
+.fb-hint {
+  margin: 0.25rem 0 1rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.fb-hint {
+  min-height: 1.4em;
+  margin: 0.6rem 0 0;
+  font-size: 0.8125rem;
+}
+
+.fb-bigname {
+  margin: 0 0 1.25rem;
+  font-family: var(--serif);
+  font-size: 2.125rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* the "· Team" subtitle on the handoff screens, not the winner line */
+#fb-next-giver span,
+#fb-round-giver span {
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* Team colors mirror the site palette — names to match */
+.fb-team-0 { color: var(--indigo); }
+.fb-team-1 { color: var(--purple); }
+.fb-team-2 { color: var(--ink); }
+.fb-team-3 { color: var(--muted); }
+
+/* Buttons: generous thumb targets, quiet until pressed */
+
+.fb-btn {
+  padding: 0.8rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.06s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.fb-btn:active {
+  transform: scale(0.97);
+}
+
+.fb-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+  transform: none;
+}
+
+.fb-btn small {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.fb-btn-primary {
+  width: 100%;
+  background: var(--purple);
+  color: #fff;
+}
+
+.fb-btn-primary:not(:disabled):hover {
+  background: var(--indigo);
+}
+
+.fb-btn-chip {
+  background: var(--chip-bg);
+  color: var(--purple);
+}
+
+.fb-btn-ghost {
+  background: none;
+  border-color: var(--lavender);
+  color: var(--muted);
+}
+
+/* Setup */
+
+#fb-add-form {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.25rem 0 0;
+}
+
+#fishbowl input[type="text"],
+.fb-config select {
+  border: 1px solid var(--lavender);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem; /* ≥16px so iOS doesn't zoom on focus */
+}
+
+#fishbowl input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  padding: 0.7rem 0.9rem;
+}
+
+#fishbowl input[type="text"]:focus-visible,
+.fb-config select:focus-visible {
+  outline: 2px solid var(--indigo);
+  outline-offset: 1px;
+}
+
+.fb-roster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fb-roster li {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0.3em 0.45em 0.3em 0.85em;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  font-size: 0.9375rem;
+}
+
+.fb-roster button {
+  padding: 0 0.35em;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.fb-roster button:hover {
+  color: var(--purple);
+}
+
+.fb-config {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0.25rem 0 1.5rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.fb-config label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fb-config select {
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+}
+
+/* Clue entry */
+
+#fb-clue-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1rem 0 1.25rem;
+}
+
+#fb-clue-inputs input {
+  width: 100%;
+}
+
+/* Play */
+
+.fb-turn-who {
+  margin: 0 0 0.75rem;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.fb-turn-who #fb-turn-giver {
+  font-family: var(--sans);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.fb-scorebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.fb-score-chip {
+  padding: 0.25em 0.8em;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.fb-score-chip.active {
+  border-color: currentColor;
+}
+
+.fb-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.fb-timer-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--lavender);
+  overflow: hidden;
+}
+
+#fb-timer-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--indigo);
+  transform-origin: left;
+}
+
+#fb-timer-num {
+  min-width: 2ch;
+  font-size: 1.375rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.fb-timer.fb-low #fb-timer-fill {
+  background: var(--purple);
+}
+
+.fb-timer.fb-low #fb-timer-num {
+  color: var(--purple);
+  animation: fb-pulse 1s ease infinite;
+}
+
+.fb-cluecard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  padding: 1.5rem;
+  border: 1px solid var(--lavender);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fff, var(--chip-bg));
+  box-shadow: 0 1px 3px rgba(38, 35, 63, 0.06);
+  text-align: center;
+}
+
+.fb-cluecard span {
+  font-family: var(--serif);
+  font-size: clamp(1.625rem, 8vw, 2.375rem);
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.fb-cluecard.fb-pop {
+  animation: fb-pop 0.22s ease;
+}
+
+.fb-remaining {
+  margin: 0.5rem 0 1rem;
+  text-align: center;
+}
+
+.fb-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.fb-actions .fb-btn {
+  min-height: 3.4rem;
+}
+
+.fb-actions .fb-btn-primary {
+  grid-column: 1 / -1;
+}
+
+/* Between turns and rounds */
+
+.fb-recap {
+  margin: 0 0 0.5rem;
+  font-family: var(--serif);
+  font-size: 1.125rem;
+}
+
+.fb-scoreboard {
+  margin: 0.5rem 0 0.75rem;
+}
+
+.fb-scoreboard .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--lavender);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.fb-scoreboard .row.lead span:last-child {
+  color: var(--purple);
+}
+
+.fb-roundcard {
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--lavender);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fff, var(--chip-bg));
+}
+
+.fb-roundcard .fb-label {
+  margin: 0 0 0.2rem;
+}
+
+.fb-roundcard .fb-sub {
+  margin: 0;
+}
+
+@keyframes fb-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fb-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fb-cluecard.fb-pop,
+  .fb-timer.fb-low #fb-timer-num {
+    animation: none;
+  }
+}

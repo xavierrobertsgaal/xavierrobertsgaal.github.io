@@ -27,7 +27,7 @@ def rebuild() -> None:
 if __name__ == "__main__":
     rebuild()  # build once before serving
     server = Server()
-    for pattern in ("content/*.md", "style.css", "script.js", "build.py"):
+    for pattern in ("content/*.md", "style.css", "script.js", "fishbowl.js", "build.py"):
         server.watch(str(ROOT / pattern), rebuild)
     print("serving http://localhost:5500  (Ctrl-C to stop)")
     server.serve(root=str(build.DIST), port=5500, host="localhost", open_url_delay=None)

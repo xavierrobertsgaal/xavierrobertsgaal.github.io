@@ -161,9 +161,7 @@
     advanceClue(false); // guessed clues leave the bowl until next round
   }
   function markIncorrect() {
-    activeTeam().score--;
-    state.turn.turnScore--;
-    advanceClue(true); // back into the bowl
+    advanceClue(true); // no penalty — the clue just goes back into the bowl
   }
   function skipClue() {
     if (state.turn.skipsUsed >= state.config.skipsPerTurn) return;

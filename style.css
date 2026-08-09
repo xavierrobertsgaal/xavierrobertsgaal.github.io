@@ -381,72 +381,139 @@ li {
 }
 
 /* Fishbowl — pass-the-phone party game (content/fishbowl.md + fishbowl.js).
-   Editorial parlor-game: serif clue slips, hairline rules, small-caps labels. */
+   A bare page (no site chrome): the room goes dark, the clue is a cream
+   paper slip, and the daytime palette comes back lightened. Serif sentences
+   instead of labels throughout. */
+
+body.page-fishbowl {
+  min-height: 100vh;
+  padding-top: 2.5rem;
+  background:
+    radial-gradient(55rem 38rem at 85% -10%, rgba(111, 71, 216, 0.3), transparent 60%),
+    radial-gradient(45rem 32rem at -10% 110%, rgba(74, 91, 208, 0.22), transparent 60%),
+    #141126;
+  color: #efecfa;
+  color-scheme: dark;
+}
+
+body.page-fishbowl ::selection {
+  background: #4a3f86;
+}
+
+.page-fishbowl .layout {
+  display: block;
+}
 
 #fishbowl {
+  --fb-cream: #fcfbfe;
+  --fb-muted: #9d96c7;
+  --fb-line: rgba(233, 229, 248, 0.16);
+  --fb-panel: rgba(233, 229, 248, 0.07);
+  --fb-indigo: #8c9aff;
+  --fb-purple: #a98aff;
   max-width: 26rem;
+  margin: 0 auto;
   font-family: var(--sans);
 }
 
-#fishbowl h1 {
-  margin-bottom: 0.5rem;
-  font-family: var(--serif);
-}
-
-.fb-label {
-  margin: 1.75rem 0 0.3rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--purple);
-}
-
-.fb-screen > .fb-label:first-child {
-  margin-top: 0;
-}
-
-.fb-sub,
-.fb-hint {
-  margin: 0.25rem 0 1rem;
-  color: var(--muted);
-  font-size: 0.9375rem;
-  line-height: 1.5;
-}
-
-.fb-hint {
-  min-height: 1.4em;
-  margin: 0.6rem 0 0;
+.fb-home {
+  margin: 0 0 2.5rem;
   font-size: 0.8125rem;
 }
 
-.fb-bigname {
+.fb-home a {
+  color: var(--fb-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.fb-home a:hover {
+  color: var(--fb-cream);
+}
+
+#fishbowl h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.35rem;
+  font-family: var(--serif);
+  font-size: 2.25rem;
+  color: var(--fb-cream);
+}
+
+.fb-fish {
+  width: 32px;
+  height: 20px;
+  color: var(--fb-purple);
+  animation: fb-bob 3.4s ease-in-out infinite;
+}
+
+/* Text: serif sentences carry the screens; sans only for buttons and meta */
+
+.fb-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--serif);
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--fb-cream);
+}
+
+.fb-line {
   margin: 0 0 1.25rem;
   font-family: var(--serif);
-  font-size: 2.125rem;
+  font-size: 1.375rem;
+  line-height: 1.35;
+  color: var(--fb-cream);
+}
+
+.fb-line strong {
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
 }
 
-/* the "· Team" subtitle on the handoff screens, not the winner line */
-#fb-next-giver span,
-#fb-round-giver span {
-  font-size: 1.125rem;
-  font-weight: 500;
-  letter-spacing: 0;
+.fb-aside,
+.fb-tagline {
+  margin: 0 0 1.25rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.0625rem;
+  color: var(--fb-muted);
 }
 
-/* Team colors mirror the site palette — names to match */
-.fb-team-0 { color: var(--indigo); }
-.fb-team-1 { color: var(--purple); }
-.fb-team-2 { color: var(--ink); }
-.fb-team-3 { color: var(--muted); }
+.fb-meta {
+  margin: 0.6rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--fb-muted);
+}
 
-/* Buttons: generous thumb targets, quiet until pressed */
+#fb-entry-progress {
+  margin: 0 0 1.5rem;
+}
+
+.fb-turn-line {
+  margin: 0 0 0.75rem;
+  font-family: var(--serif);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--fb-cream);
+}
+
+.fb-turn-line span {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--fb-muted);
+}
+
+/* Team colors: the site palette, lightened for the dark room */
+.fb-team-0 { color: var(--fb-indigo); }
+.fb-team-1 { color: var(--fb-purple); }
+.fb-team-2 { color: var(--fb-cream); }
+.fb-team-3 { color: var(--fb-muted); }
+
+/* Buttons: generous thumb targets */
 
 .fb-btn {
-  padding: 0.8rem 1.1rem;
+  padding: 0.85rem 1.1rem;
   border: 1px solid transparent;
   border-radius: 10px;
   font-family: var(--sans);
@@ -454,7 +521,7 @@ li {
   font-weight: 600;
   line-height: 1.25;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.06s ease;
+  transition: filter 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.06s ease;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
@@ -469,32 +536,26 @@ li {
   transform: none;
 }
 
-.fb-btn small {
-  display: block;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  opacity: 0.75;
-}
-
 .fb-btn-primary {
   width: 100%;
-  background: var(--purple);
+  background: linear-gradient(135deg, var(--purple), var(--indigo));
   color: #fff;
+  box-shadow: 0 6px 24px rgba(111, 71, 216, 0.35);
 }
 
 .fb-btn-primary:not(:disabled):hover {
-  background: var(--indigo);
+  filter: brightness(1.1);
 }
 
 .fb-btn-chip {
-  background: var(--chip-bg);
-  color: var(--purple);
+  background: var(--fb-panel);
+  color: var(--fb-purple);
 }
 
 .fb-btn-ghost {
   background: none;
-  border-color: var(--lavender);
-  color: var(--muted);
+  border-color: var(--fb-line);
+  color: var(--fb-muted);
 }
 
 /* Setup */
@@ -502,17 +563,22 @@ li {
 #fb-add-form {
   display: flex;
   gap: 0.5rem;
-  margin: 1.25rem 0 0;
+  margin: 1.5rem 0 0;
 }
 
 #fishbowl input[type="text"],
 .fb-config select {
-  border: 1px solid var(--lavender);
+  border: 1px solid var(--fb-line);
   border-radius: 10px;
-  background: #fff;
-  color: var(--ink);
+  background: rgba(233, 229, 248, 0.06);
+  color: var(--fb-cream);
   font-family: var(--sans);
   font-size: 1rem; /* ≥16px so iOS doesn't zoom on focus */
+}
+
+#fishbowl input[type="text"]::placeholder {
+  color: var(--fb-muted);
+  opacity: 0.8;
 }
 
 #fishbowl input[type="text"] {
@@ -523,7 +589,7 @@ li {
 
 #fishbowl input[type="text"]:focus-visible,
 .fb-config select:focus-visible {
-  outline: 2px solid var(--indigo);
+  outline: 2px solid var(--fb-indigo);
   outline-offset: 1px;
 }
 
@@ -543,7 +609,7 @@ li {
   margin: 0;
   padding: 0.3em 0.45em 0.3em 0.85em;
   border-radius: 999px;
-  background: var(--chip-bg);
+  background: var(--fb-panel);
   font-size: 0.9375rem;
 }
 
@@ -551,21 +617,21 @@ li {
   padding: 0 0.35em;
   border: none;
   background: none;
-  color: var(--muted);
+  color: var(--fb-muted);
   font-size: 1.05rem;
   line-height: 1;
   cursor: pointer;
 }
 
 .fb-roster button:hover {
-  color: var(--purple);
+  color: var(--fb-purple);
 }
 
 .fb-config {
   display: flex;
   gap: 1.5rem;
   margin: 0.25rem 0 1.5rem;
-  color: var(--muted);
+  color: var(--fb-muted);
   font-size: 0.9375rem;
 }
 
@@ -586,7 +652,7 @@ li {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  margin: 1rem 0 1.25rem;
+  margin: 0 0 1.25rem;
 }
 
 #fb-clue-inputs input {
@@ -595,32 +661,18 @@ li {
 
 /* Play */
 
-.fb-turn-who {
-  margin: 0 0 0.75rem;
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
-.fb-turn-who #fb-turn-giver {
-  font-family: var(--sans);
-  font-size: 0.9375rem;
-  font-weight: 400;
-  color: var(--muted);
-}
-
 .fb-scorebar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.5rem;
 }
 
 .fb-score-chip {
   padding: 0.25em 0.8em;
   border: 1px solid transparent;
   border-radius: 999px;
-  background: var(--chip-bg);
+  background: var(--fb-panel);
   font-size: 0.8125rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -641,14 +693,14 @@ li {
   flex: 1;
   height: 6px;
   border-radius: 3px;
-  background: var(--lavender);
+  background: rgba(233, 229, 248, 0.14);
   overflow: hidden;
 }
 
 #fb-timer-fill {
   height: 100%;
   border-radius: 3px;
-  background: var(--indigo);
+  background: var(--fb-indigo);
   transform-origin: left;
 }
 
@@ -658,16 +710,19 @@ li {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   text-align: right;
+  color: var(--fb-cream);
 }
 
 .fb-timer.fb-low #fb-timer-fill {
-  background: var(--purple);
+  background: var(--fb-purple);
 }
 
 .fb-timer.fb-low #fb-timer-num {
-  color: var(--purple);
+  color: var(--fb-purple);
   animation: fb-pulse 1s ease infinite;
 }
+
+/* The clue: a cream paper slip under lamplight — the one bright thing */
 
 .fb-cluecard {
   display: flex;
@@ -675,10 +730,10 @@ li {
   justify-content: center;
   min-height: 10rem;
   padding: 1.5rem;
-  border: 1px solid var(--lavender);
   border-radius: 14px;
-  background: linear-gradient(180deg, #fff, var(--chip-bg));
-  box-shadow: 0 1px 3px rgba(38, 35, 63, 0.06);
+  background: linear-gradient(180deg, #fff, #f1edfa);
+  box-shadow: 0 14px 40px rgba(5, 3, 16, 0.5), 0 2px 8px rgba(5, 3, 16, 0.35);
+  transform: rotate(-0.75deg);
   text-align: center;
 }
 
@@ -687,6 +742,7 @@ li {
   font-size: clamp(1.625rem, 8vw, 2.375rem);
   font-weight: 700;
   line-height: 1.2;
+  color: var(--ink);
   overflow-wrap: anywhere;
 }
 
@@ -695,7 +751,7 @@ li {
 }
 
 .fb-remaining {
-  margin: 0.5rem 0 1rem;
+  margin: 0.75rem 0 1.25rem;
   text-align: center;
 }
 
@@ -715,54 +771,32 @@ li {
 
 /* Between turns and rounds */
 
-.fb-recap {
-  margin: 0 0 0.5rem;
-  font-family: var(--serif);
-  font-size: 1.125rem;
-}
-
 .fb-scoreboard {
-  margin: 0.5rem 0 0.75rem;
+  margin: 1.25rem 0 1.75rem;
 }
 
 .fb-scoreboard .row {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
-  border-bottom: 1px solid var(--lavender);
+  border-bottom: 1px solid var(--fb-line);
   font-size: 1.0625rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
 .fb-scoreboard .row.lead span:last-child {
-  color: var(--purple);
-}
-
-.fb-roundcard {
-  margin: 1.5rem 0 0;
-  padding: 1rem 1.1rem;
-  border: 1px solid var(--lavender);
-  border-radius: 14px;
-  background: linear-gradient(180deg, #fff, var(--chip-bg));
-}
-
-.fb-roundcard .fb-label {
-  margin: 0 0 0.2rem;
-}
-
-.fb-roundcard .fb-sub {
-  margin: 0;
+  color: var(--fb-purple);
 }
 
 @keyframes fb-pop {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px) rotate(0.5deg);
   }
   to {
     opacity: 1;
-    transform: none;
+    transform: rotate(-0.75deg);
   }
 }
 
@@ -772,9 +806,17 @@ li {
   }
 }
 
+@keyframes fb-bob {
+  50% {
+    transform: translateY(-3px) rotate(-4deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fb-cluecard.fb-pop,
-  .fb-timer.fb-low #fb-timer-num {
+  .fb-timer.fb-low #fb-timer-num,
+  .fb-fish {
     animation: none;
   }
 }
+

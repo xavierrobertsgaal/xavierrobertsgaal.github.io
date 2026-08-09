@@ -9,9 +9,9 @@
   const KEY = "fishbowl.v1";
   const ROUNDS = [
     null,
-    { name: "Round 1 — Describe it", rules: "Say anything you like about the word — except the word itself." },
-    { name: "Round 2 — One word", rules: "Exactly one word as the clue. Same words as round 1, so remember them!" },
-    { name: "Round 3 — Act it out", rules: "No words at all. Charades-style, same words again." },
+    { mode: "describe it", line: "Round 1: describe it — say anything but the word itself." },
+    { mode: "one word", line: "Round 2: one word only — same words as before." },
+    { mode: "act it out", line: "Round 3: act it out — no words at all." },
   ];
   const TEAM_NAMES = ["Team Indigo", "Team Plum", "Team Ink", "Team Slate"];
 
@@ -269,25 +269,20 @@
     const need = Math.max(2, state.config.numTeams);
     const ok = n >= need;
     $("fb-start").disabled = !ok;
-    $("fb-setup-hint").textContent = ok
-      ? n === state.config.numTeams
-        ? "Heads up: one player per team means you'll be guessing your own clues."
-        : ""
-      : `Add ${need - n} more player${need - n === 1 ? "" : "s"} to start ${state.config.numTeams} teams.`;
+    $("fb-setup-hint").textContent = ok ? "" : `Need ${need - n} more player${need - n === 1 ? "" : "s"}.`;
   }
 
   function renderEntry() {
     const player = state.players[state.entry.currentPlayerIndex];
     const team = state.teams[player.teamId];
-    $("fb-entry-progress").textContent = `Filling the bowl — player ${state.entry.currentPlayerIndex + 1} of ${
-      state.players.length
-    }`;
+    $("fb-entry-progress").textContent = `${state.entry.currentPlayerIndex + 1} of ${state.players.length}`;
     $("fb-pass").hidden = entryRevealed;
     $("fb-entry-form").hidden = !entryRevealed;
     if (!entryRevealed) {
       $("fb-pass-name").textContent = player.name;
       $("fb-pass-team").innerHTML = `You're on <strong class="fb-team-${team.id}">${esc(team.name)}</strong>.`;
     } else {
+      $("fb-entry-title").textContent = `Your ${state.config.cluesPerPlayer} slips — keep them secret.`;
       const box = $("fb-clue-inputs");
       box.innerHTML = Array.from(
         { length: state.config.cluesPerPlayer },
@@ -304,10 +299,9 @@
 
   function renderPlay() {
     const { team, giver } = nextUp();
-    $("fb-round-label").textContent = ROUNDS[state.round].name;
-    $("fb-turn-team").textContent = team.name;
-    $("fb-turn-team").className = `fb-teamname fb-team-${team.id}`;
-    $("fb-turn-giver").textContent = `${giver.name} gives clues`;
+    $("fb-turn-giver").textContent = giver.name;
+    $("fb-turn-giver").className = `fb-team-${team.id}`;
+    $("fb-round-mode").textContent = ` — ${ROUNDS[state.round].mode}`;
     $("fb-scorebar").innerHTML = state.teams
       .map(
         (t) =>
@@ -349,26 +343,30 @@
   function recapText(recap) {
     const team = state.teams[recap.teamId];
     const pts = recap.points;
-    return `${team.name} ${pts >= 0 ? "scored" : "lost"} ${Math.abs(pts)} point${
+    return `${team.name} ${pts >= 0 ? "picked up" : "lost"} ${Math.abs(pts)} point${
       Math.abs(pts) === 1 ? "" : "s"
-    } that turn.`;
+    }.`;
+  }
+
+  function nextUpHTML(prefix) {
+    const { team, giver } = nextUp();
+    return `${prefix} <strong>${esc(giver.name)}</strong>, for <span class="fb-team-${team.id}">${esc(
+      team.name
+    )}</span>.`;
   }
 
   function renderTurnEnd() {
     $("fb-turn-recap").textContent = state.turn.lastRecap ? recapText(state.turn.lastRecap) : "";
     $("fb-scores-turnend").innerHTML = scoreboardHTML();
-    const { team, giver } = nextUp();
-    $("fb-next-giver").innerHTML = `${esc(giver.name)} <span class="fb-team-${team.id}">· ${esc(team.name)}</span>`;
+    $("fb-next-giver").innerHTML = nextUpHTML("Next up:");
   }
 
   function renderRoundEnd() {
     const intro = !state.turn.lastRecap; // fresh game: the bowl was just filled
-    $("fb-roundend-label").textContent = intro ? "The bowl is full" : `Round ${state.round - 1} complete`;
+    $("fb-roundend-label").textContent = intro ? "The bowl is full." : `That’s round ${state.round - 1}.`;
     $("fb-scores-roundend").innerHTML = intro ? "" : scoreboardHTML();
-    $("fb-nextround-name").textContent = ROUNDS[state.round].name;
-    $("fb-nextround-rules").textContent = ROUNDS[state.round].rules;
-    const { team, giver } = nextUp();
-    $("fb-round-giver").innerHTML = `${esc(giver.name)} <span class="fb-team-${team.id}">· ${esc(team.name)}</span>`;
+    $("fb-nextround-name").textContent = ROUNDS[state.round].line;
+    $("fb-round-giver").innerHTML = nextUpHTML("First up:");
   }
 
   function renderGameover() {
@@ -376,8 +374,8 @@
     const winners = state.teams.filter((t) => t.score === best);
     $("fb-winner").innerHTML =
       winners.length === 1
-        ? `<span class="fb-team-${winners[0].id}">${esc(winners[0].name)}</span> wins!`
-        : "It's a tie!";
+        ? `<span class="fb-team-${winners[0].id}">${esc(winners[0].name)}</span> wins.`
+        : "It’s a tie.";
     $("fb-scores-final").innerHTML = scoreboardHTML();
   }
 

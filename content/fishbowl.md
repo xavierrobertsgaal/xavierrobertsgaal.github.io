@@ -1,14 +1,16 @@
 ---
 title: Fishbowl
+bare: true
 ---
 
 <div id="fishbowl" data-phase="setup">
-<p id="fb-storage-note" class="fb-hint" hidden>Saving is off in this browser — reloading will lose the game.</p>
+<p class="fb-home"><a href="index.html">&larr; xavierrg.com</a></p>
+<p id="fb-storage-note" class="fb-meta" hidden>Saving is off in this browser — reloading will lose the game.</p>
 <section class="fb-screen" data-phase="setup">
-  <h1>Fishbowl</h1>
-  <p class="fb-sub">One phone, two-plus teams, three rounds — describe it, one word, act it out. Add everyone playing, then pass the phone around to fill the bowl.</p>
+  <h1>Fishbowl <svg class="fb-fish" viewBox="0 0 32 20" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="10" rx="10" ry="6.5"/><path d="M21 10l9-6.5v13z"/><circle cx="6.5" cy="8" r="1.4" fill="#141126"/></svg></h1>
+  <p class="fb-tagline">Describe it. One word. Act it out.</p>
   <form id="fb-add-form" autocomplete="off">
-    <input id="fb-name-input" type="text" placeholder="Player name" maxlength="40" enterkeyhint="done" autocapitalize="words">
+    <input id="fb-name-input" type="text" placeholder="Who's playing?" maxlength="40" enterkeyhint="done" autocapitalize="words">
     <button type="submit" class="fb-btn fb-btn-chip">Add</button>
   </form>
   <ul id="fb-roster" class="fb-roster"></ul>
@@ -29,63 +31,54 @@ title: Fishbowl
       </select>
     </label>
   </div>
-  <button id="fb-start" class="fb-btn fb-btn-primary" disabled>Draw teams &amp; start</button>
-  <p id="fb-setup-hint" class="fb-hint"></p>
+  <button id="fb-start" class="fb-btn fb-btn-primary" disabled>Start</button>
+  <p id="fb-setup-hint" class="fb-meta"></p>
 </section>
 <section class="fb-screen" data-phase="entry" hidden>
-  <p class="fb-label" id="fb-entry-progress"></p>
+  <p id="fb-entry-progress" class="fb-meta"></p>
   <div id="fb-pass">
-    <p class="fb-label">Pass the phone to</p>
-    <p class="fb-bigname" id="fb-pass-name"></p>
-    <p class="fb-sub" id="fb-pass-team"></p>
-    <button id="fb-pass-ready" class="fb-btn fb-btn-primary">Got it — show my clue slips</button>
+    <p class="fb-line">Pass the phone to <strong id="fb-pass-name"></strong>.</p>
+    <p class="fb-aside" id="fb-pass-team"></p>
+    <button id="fb-pass-ready" class="fb-btn fb-btn-primary">Ready</button>
   </div>
   <div id="fb-entry-form" hidden>
-    <p class="fb-label">Your clues</p>
-    <p class="fb-sub">Words or phrases the others will guess. Keep them secret — the phone moves on when you're done.</p>
+    <p class="fb-line" id="fb-entry-title"></p>
     <div id="fb-clue-inputs"></div>
-    <button id="fb-entry-done" class="fb-btn fb-btn-primary" disabled>Into the bowl — pass it on</button>
+    <button id="fb-entry-done" class="fb-btn fb-btn-primary" disabled>Done</button>
   </div>
 </section>
 <section class="fb-screen" data-phase="play" hidden>
-  <p class="fb-label" id="fb-round-label"></p>
-  <p class="fb-turn-who"><span id="fb-turn-team"></span> · <span id="fb-turn-giver"></span></p>
+  <p class="fb-turn-line"><strong id="fb-turn-giver"></strong><span id="fb-round-mode"></span></p>
   <div id="fb-scorebar" class="fb-scorebar"></div>
   <div class="fb-timer" id="fb-timer">
     <div class="fb-timer-bar"><div id="fb-timer-fill"></div></div>
     <div id="fb-timer-num">60</div>
   </div>
   <div id="fb-cluecard" class="fb-cluecard"><span id="fb-clue-text"></span></div>
-  <p class="fb-hint fb-remaining"><span id="fb-left-count"></span> left in the bowl</p>
+  <p class="fb-meta fb-remaining"><span id="fb-left-count"></span> left in the bowl</p>
   <div class="fb-actions">
-    <button id="fb-incorrect" class="fb-btn fb-btn-ghost">Incorrect<small>&minus;1</small></button>
-    <button id="fb-skip" class="fb-btn fb-btn-chip">Skip<small>1 per turn</small></button>
-    <button id="fb-correct" class="fb-btn fb-btn-primary">Correct<small>+1</small></button>
+    <button id="fb-incorrect" class="fb-btn fb-btn-ghost">Incorrect</button>
+    <button id="fb-skip" class="fb-btn fb-btn-chip">Skip</button>
+    <button id="fb-correct" class="fb-btn fb-btn-primary">Correct</button>
   </div>
 </section>
 <section class="fb-screen" data-phase="turnEnd" hidden>
-  <p class="fb-label">Time!</p>
-  <p class="fb-recap" id="fb-turn-recap"></p>
+  <p class="fb-title">Time&rsquo;s up.</p>
+  <p class="fb-aside" id="fb-turn-recap"></p>
   <div class="fb-scoreboard" id="fb-scores-turnend"></div>
-  <p class="fb-label">Up next</p>
-  <p class="fb-bigname" id="fb-next-giver"></p>
-  <button id="fb-start-turn" class="fb-btn fb-btn-primary">Start 60 seconds</button>
+  <p class="fb-line" id="fb-next-giver"></p>
+  <button id="fb-start-turn" class="fb-btn fb-btn-primary">Start</button>
 </section>
 <section class="fb-screen" data-phase="roundEnd" hidden>
-  <p class="fb-label" id="fb-roundend-label"></p>
+  <p class="fb-title" id="fb-roundend-label"></p>
   <div class="fb-scoreboard" id="fb-scores-roundend"></div>
-  <div class="fb-roundcard">
-    <p class="fb-label" id="fb-nextround-name"></p>
-    <p class="fb-sub" id="fb-nextround-rules"></p>
-  </div>
-  <p class="fb-label">Up first</p>
-  <p class="fb-bigname" id="fb-round-giver"></p>
-  <button id="fb-start-round" class="fb-btn fb-btn-primary">Start 60 seconds</button>
+  <p class="fb-aside" id="fb-nextround-name"></p>
+  <p class="fb-line" id="fb-round-giver"></p>
+  <button id="fb-start-round" class="fb-btn fb-btn-primary">Start</button>
 </section>
 <section class="fb-screen" data-phase="gameover" hidden>
-  <p class="fb-label">Final score</p>
-  <p class="fb-bigname" id="fb-winner"></p>
+  <p class="fb-title" id="fb-winner"></p>
   <div class="fb-scoreboard" id="fb-scores-final"></div>
-  <button id="fb-newgame" class="fb-btn fb-btn-primary">New game, same crowd</button>
+  <button id="fb-newgame" class="fb-btn fb-btn-primary">Play again</button>
 </section>
 </div>

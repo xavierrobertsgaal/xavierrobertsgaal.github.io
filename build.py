@@ -114,7 +114,13 @@ def main() -> None:
             f'class="navlink active" href="{path.stem}.html"',
         )
         page = page.replace("{{content}}", html)
-        page = page.replace("{{webring}}", webring)
+        # Pages with `bare: true` frontmatter drop the site chrome (side nav
+        # and webring) — the fishbowl game supplies its own way home.
+        if meta.get("bare") == "true":
+            page = re.sub(r'<nav class="side">.*?</nav>\n', "", page, flags=re.S)
+            page = page.replace("{{webring}}", "")
+        else:
+            page = page.replace("{{webring}}", webring)
         # Page-specific JS: only the fishbowl game loads its script.
         page = page.replace(
             "{{scripts}}",

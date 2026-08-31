@@ -14,12 +14,11 @@ title: Publications
 ## Representative papers
 
 - <span class="tag tag-c">Culture</span> **Roberts-Gaal, X.**, Bolic, M., & Cushman, F. A. (2025). [Environmental variability shapes the representational format of cultural learning](https://doi.org/10.1073/pnas.2505283122). *Proceedings of the National Academy of Sciences*, 122(28).
-- <span class="tag tag-ai">AI</span> Voudouris, K., **Roberts-Gaal, X.**, Bramley, N., Sucholutsky, I., & Summerfield, C. [The Cognitive Science of AI Alignment](https://www.bramleylab.ppls.ed.ac.uk/pdfs/voudouris2026alignment.pdf).
+- <span class="tag tag-ai">AI</span><span class="tag tag-m">Morality</span><span class="tag tag-c">Culture</span> Voudouris, K.\*, **Roberts-Gaal, X.**\*, Buhl, M., Irving, G., & Summerfield, C. [AI alignment is a human problem](https://osf.io/preprints/psyarxiv/zqngj_v1).
 - <span class="tag tag-m">Morality</span> Le Pargneux, A.\*, **Roberts-Gaal, X.**\*, & Cushman, F. A. [Hard bargains and even splits: Fairness judgments track bargaining power across diverse cultures](https://osf.io/preprints/psyarxiv/3uqks_v2). Under review at *Nature Communications*.
 
 ## Working and in-prep papers
 
-- <span class="tag tag-ai">AI</span><span class="tag tag-m">Morality</span><span class="tag tag-c">Culture</span> Voudouris, K.\*, **Roberts-Gaal, X.**\*, Buhl, M., Irving, G., & Summerfield, C. [AI alignment is a human problem](https://osf.io/preprints/psyarxiv/zqngj_v1).
 - <span class="tag tag-ai">AI</span> Zhou Hong, S., Kleinman, A., Mathiowetz, A., Howes, A., Cohen, J., Ganta, S., Letizia, A., Liao, D., Pahari, D., **Roberts-Gaal, X.**, Righetti, L., & Torres, J. (2026). [Measuring mid-2025 LLM-assistance on novice performance in biology](https://arxiv.org/abs/2602.16703).
 - <span class="tag tag-m">Morality</span> Law, K. F., …, **Roberts-Gaal, X.**, …, & Syropoulos, S. (2026). [Social discounting outpredicts temporal discounting in intergenerational judgment: A many labs investigation](https://osf.io/6qyv7_v1).
 - <span class="tag tag-m">Morality</span><span class="tag tag-c">Culture</span> **Roberts-Gaal, X.**\*, Le Pargneux, A.\*, Mungunda, M., Tjikuvua, P., Fredrik, C., Hartley, V., Cushman, F. A., Kroupin, I., & Davis, H. Moral judgment and proportional contribution in a small-scale society.

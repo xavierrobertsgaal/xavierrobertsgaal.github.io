@@ -118,6 +118,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  align-self: stretch;
   gap: 0.5rem;
   margin-top: 1.1rem;
   padding-top: 1.1rem;
@@ -139,6 +140,26 @@ body {
 
 main > :first-child {
   margin-top: 0;
+}
+
+/* Headshot: tops the side nav, links home, hairline rule below */
+.headshot-link {
+  width: 100%;
+  line-height: 0;
+}
+
+.headshot {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px var(--lavender);
+}
+
+.siderule {
+  width: 100%;
+  margin: 0.45rem 0;
+  border: none;
+  border-top: 1px solid var(--lavender);
 }
 
 /* Text */
@@ -355,6 +376,16 @@ li {
     gap: 1.1rem;
     margin-bottom: 2.5rem;
     padding-top: 0;
+  }
+
+  /* In the horizontal mobile nav, the headshot shrinks to a thumbnail
+     and drops the hairline */
+  .headshot-link {
+    width: 3.25rem;
+  }
+
+  .siderule {
+    display: none;
   }
 
   .social {

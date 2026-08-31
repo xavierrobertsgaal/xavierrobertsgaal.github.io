@@ -13,7 +13,7 @@ import markdown
 ROOT = Path(__file__).parent
 CONTENT = ROOT / "content"
 DIST = ROOT / "dist"
-ASSETS = ["style.css", "script.js", "fishbowl.js", "favicon.svg", "publications.bib", "cv.pdf", "fonts"]
+ASSETS = ["style.css", "script.js", "fishbowl.js", "favicon.svg", "publications.bib", "cv.pdf", "headshot.jpg", "fonts"]
 
 TEMPLATE = """<!doctype html>
 <html lang="en">
@@ -33,6 +33,8 @@ TEMPLATE = """<!doctype html>
 <body class="page-{{page}}">
 <div class="layout">
 <nav class="side">
+  <a class="headshot-link" href="index.html"><img class="headshot" src="headshot.jpg" alt="Xavier Roberts-Gaal" width="300" height="375"></a>
+  <hr class="siderule">
   <a class="navlink" href="index.html">About</a>
   <a class="navlink" href="publications.html">Publications</a>
   <a class="navlink" href="reading.html">Reading</a>

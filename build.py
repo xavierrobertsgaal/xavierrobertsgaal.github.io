@@ -38,7 +38,7 @@ TEMPLATE = """<!doctype html>
   <a class="navlink" href="index.html">About</a>
   <a class="navlink" href="publications.html">Publications</a>
   <a class="navlink" href="reading.html">Reading</a>
-  <a class="navlink" href="cv.pdf">CV</a>
+  <a class="navlink" href="cv.pdf" target="_blank">CV</a>
   <span class="social">
     <a href="mailto:xavierrobertsgaal@g.harvard.edu"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="label">Email</span></a>
     <a href="https://scholar.google.com/citations?user=VwvXaLEAAAAJ&hl=en"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg><span class="label">Google Scholar</span></a>

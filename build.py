@@ -75,6 +75,17 @@ def render(text: str) -> str:
     return markdown.markdown(text, extensions=["extra", "smarty"])
 
 
+def new_tab_links(html: str) -> str:
+    """Open external links in a new tab. Internal links are all relative, so
+    any absolute http(s) href is external. rel=noopener cuts window.opener;
+    noreferrer is deliberately omitted so linked sites still see referrals."""
+    return re.sub(
+        r'<a (?![^>]*\btarget=)(?=[^>]*href="https?://)([^>]*)>',
+        r'<a \1 target="_blank" rel="noopener">',
+        html,
+    )
+
+
 def prune_nav(template: str, built: set[str]) -> str:
     """Drop nav links whose page wasn't built (e.g. a draft), so the nav never
     points at a missing page. Non-page links like cv.pdf are left untouched."""
@@ -129,7 +140,7 @@ def main() -> None:
             '\n<script src="fishbowl.js" defer></script>' if path.stem == "fishbowl" else "",
         )
         out = DIST / f"{path.stem}.html"
-        out.write_text(page)
+        out.write_text(new_tab_links(page))
         print(f"built {out.relative_to(ROOT)}")
 
 

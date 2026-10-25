@@ -10,7 +10,4 @@ I'm also a PhD candidate in the [Laboratory for Social Cognitive Science](https:
 
 Previously, I spent some time on technical AI governance (mostly the design and interpretation of evals). In a prior life I worked at McKinsey's London office, on strategy, org design, and data/analytics topics; during this time I also advised a global health nonprofit. (I remain interested in global development and think distributive problems will be increasingly important in the world to come!) And, I have many happy memories from reading Psychology & Philosophy at New College, Oxford, where I spent lots of time thinking about empathy and deep learning theory.
 
-<!-- Substack temporarily hidden; restore by moving back into the paragraph below:
-I write at [Seeing Truly](https://seeingtruly.substack.com/) on Substack. -->
-
-You can leave an anonymous message for me [here](https://tally.so/r/obZ6aX). Send me [an email](mailto:xavierrobertsgaal@g.harvard.edu) if you'd like to chat!
+I write at [Seeing Truly](https://seeingtruly.substack.com/) on Substack. You can leave an anonymous message for me [here](https://tally.so/r/obZ6aX). Send me [an email](mailto:xavierrobertsgaal@g.harvard.edu) if you'd like to chat!

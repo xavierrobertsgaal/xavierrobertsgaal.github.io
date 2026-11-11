@@ -1,6 +1,6 @@
 # personal-website
 
-Markdown-first personal site for [Xavier Roberts-Gaal](https://xrg.scholars.harvard.edu), in the spirit of ankit.io / sempervirens.io.
+Markdown-first personal site for [Xavier Roberts-Gaal](https://xrg.scholars.harvard.edu), in the spirit of ankit.io.
 
 ## How it works
 

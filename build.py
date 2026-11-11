@@ -114,8 +114,11 @@ def main() -> None:
     pages = [p for p in sorted(CONTENT.glob("*.md")) if not p.name.startswith("_")]
     built = {p.stem for p in pages}
 
-    _, webring_body = parse((CONTENT / "_webring.md").read_text())
-    webring = f'<footer class="webring">\n{render(webring_body)}\n</footer>'
+    # The webring is optional: park _webring.md in content/drafts/ to hide it.
+    webring = ""
+    if (CONTENT / "_webring.md").exists():
+        _, webring_body = parse((CONTENT / "_webring.md").read_text())
+        webring = f'<footer class="webring">\n{render(webring_body)}\n</footer>'
     template = prune_nav(TEMPLATE, built)
     for path in pages:
         meta, body = parse(path.read_text())
